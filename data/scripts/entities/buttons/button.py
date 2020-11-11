@@ -15,12 +15,19 @@ class Button(GameEntity):
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.active = True
+        # TODO: a changer quand j'aurais ajouté des menus a scroller avec le controller
+        self.controller_selected = True
 
     def action(self):
         print("you didn't override this in the child class")
 
     def check_clicked(self):
         if self.mouse_is_on() and self.game.input.just_clicked:
+            return self.action()
+
+    def check_controller_selected(self):
+        # TODO: ajuster quand plusieurs boutons
+        if self.game.input.A:
             return self.action()
 
     def disable_and_hide(self):
@@ -33,6 +40,9 @@ class Button(GameEntity):
 
     def update(self):
         if self.active:
-            self.check_clicked()
+            if self.game.input.control_mode == 'keyboard':
+                self.check_clicked()
+            elif self.game.input.control_mode == 'controller':
+                self.check_controller_selected()
         if self.visible:
             pygame.draw.rect(self.game.window.display, self.color, self.rect)

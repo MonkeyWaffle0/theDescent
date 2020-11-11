@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 from data.scripts.config import *
+from data.scripts.ui.controller_manager import ControllerManager
 
 
 class InputManager:
@@ -18,6 +19,14 @@ class InputManager:
         self.up = False
         self.left_click = False
         self.just_clicked = False
+
+        self.controller_manager = ControllerManager(game)
+        self.controller_deadzone = 40
+        self.controller_x = 0
+        self.controller_y = 0
+        self.A = False
+
+        self.control_mode = 'controller'
 
         self.mouse_pos = pygame.mouse.get_pos()
         self.mouse_pos = [self.mouse_pos[0], self.mouse_pos[1]]
@@ -47,7 +56,10 @@ class InputManager:
         pressed_keys = pygame.key.get_pressed()
         for event in pygame.event.get():
             self.filter_quit_event(pressed_keys, event)
-            self.handle_input(event)
+            if self.control_mode == 'keyboard':
+                self.handle_keyboard_input(event)
+            else:
+                self.handle_controller_input(event)
 
     def filter_quit_event(self, pressed_keys, event):
         quit_attempt = False
@@ -62,7 +74,7 @@ class InputManager:
         if quit_attempt:
             self.game.active_scene.terminate()
 
-    def handle_input(self, event):
+    def handle_keyboard_input(self, event):
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
                 self.jump = True
@@ -96,3 +108,28 @@ class InputManager:
         if event.type == MOUSEBUTTONUP:
             self.just_clicked = True
             self.left_click = False
+
+    def handle_controller_input(self, event):
+        if event.type == JOYBUTTONDOWN:
+            if event.button == 0:
+                self.jump = True
+                self.A = True
+                self.released_jump = False
+        if event.type == JOYBUTTONUP:
+            if event.button == 0:
+                self.jump = False
+                self.A = False
+                self.released_jump = True
+        if event.type == JOYAXISMOTION and abs(event.value * 100) >= self.controller_deadzone:
+            if event.axis == 0:
+                self.controller_x = event.value * 100
+            elif event.axis == 1:
+                self.controller_y = event.value * 100
+
+    def joystick_to_input(self):
+        if self.controller_x > 0:
+            self.right = True
+            self.left = False
+        elif self.controller_x < 0:
+            self.left = True
+            self.right = False

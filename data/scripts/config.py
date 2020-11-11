@@ -43,3 +43,8 @@ SPIKE = {'letter': 'W', 'name': 'spike', 'color': GRAY}
 NEXT_LINE = '\n'
 
 LEVEL_PATH = "level_generator/data/saved_levels/"
+
+# render modes
+GAME = 'game'
+RECONNECT_CONTROLLER = 'disconnected controller'
+TRANSITION = 'transition'

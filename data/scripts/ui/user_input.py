@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-from data.scripts.config import *
 from data.scripts.ui.controller_manager import ControllerManager
 
 
@@ -21,7 +20,7 @@ class InputManager:
         self.just_clicked = False
 
         self.controller_manager = ControllerManager(game)
-        self.controller_deadzone = 40
+        self.controller_deadzone = 20
         self.controller_x = 0
         self.controller_y = 0
         self.A = False
@@ -58,8 +57,10 @@ class InputManager:
             self.filter_quit_event(pressed_keys, event)
             if self.control_mode == 'keyboard':
                 self.handle_keyboard_input(event)
-            else:
+            elif self.control_mode == 'controller':
+                self.controller_manager.check_plug()
                 self.handle_controller_input(event)
+                self.joystick_to_input()
 
     def filter_quit_event(self, pressed_keys, event):
         quit_attempt = False
@@ -120,16 +121,17 @@ class InputManager:
                 self.jump = False
                 self.A = False
                 self.released_jump = True
-        if event.type == JOYAXISMOTION and abs(event.value * 100) >= self.controller_deadzone:
+        if event.type == JOYAXISMOTION:
             if event.axis == 0:
                 self.controller_x = event.value * 100
             elif event.axis == 1:
                 self.controller_y = event.value * 100
 
     def joystick_to_input(self):
-        if self.controller_x > 0:
-            self.right = True
-            self.left = False
-        elif self.controller_x < 0:
-            self.left = True
-            self.right = False
+        self.left = False
+        self.right = False
+        if abs(self.controller_x) > self.controller_deadzone:
+            if self.controller_x > 0:
+                self.right = True
+            elif self.controller_x < 0:
+                self.left = True

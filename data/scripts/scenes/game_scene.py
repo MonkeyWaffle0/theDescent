@@ -1,5 +1,4 @@
-from data.scripts.entities.wall import Wall
-from data.scripts.scenes.scene import Scene, WHITE, DISPLAY_SIZE
+from data.scripts.scenes.scene import Scene, WHITE
 
 
 class GameScene(Scene):
@@ -19,4 +18,4 @@ class GameScene(Scene):
         self.display.fill(WHITE)
 
     def load_level(self):
-        self.level_dic = self.level_handler.load_level('spiketest')
+        self.level_dic = self.level_handler.load_level('test')

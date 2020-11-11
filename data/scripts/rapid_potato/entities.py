@@ -99,9 +99,6 @@ class PhysicsObj(object):
         return collision_types
 
 
-# 3d collision detection
-# todo: add 3d physics-based movement
-
 class Cuboid(object):
     def __init__(self, x, y, z, x_size, y_size, z_size):
         self.x = x

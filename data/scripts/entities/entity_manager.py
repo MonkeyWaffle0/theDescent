@@ -8,6 +8,7 @@ class EntityManager:
         self.collision_blocks = []
         self.touchables = []
         self.entities = []
+        self.player = None
 
     def reset_entities(self):
         self.entities = []

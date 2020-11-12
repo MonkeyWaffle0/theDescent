@@ -35,8 +35,6 @@ class Game:
         self.game_timer = 0
 
     def update(self):
-        # self.fps.frame_begin()
-
         if self.render_mode == GAME:
             self.active_scene.handle_game_frame()
 
@@ -47,7 +45,6 @@ class Game:
             self.reconnect_controller.update()
 
         self.gui.update()
-        # self.fps.frame_end()
         self.window.update(self)
         self.clock.tick(FPS)
 

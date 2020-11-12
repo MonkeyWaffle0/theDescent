@@ -1,5 +1,4 @@
 from data.scripts.core_funcs import *
-from data.scripts.ui.camera import Camera
 
 
 class Scene:

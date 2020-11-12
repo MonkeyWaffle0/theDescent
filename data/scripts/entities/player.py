@@ -31,7 +31,7 @@ class Player(GameEntity):
         self.momentum.air_time += 1
         movement = self.momentum.velocity.copy()
 
-        self.collision_manager.process_collisions(movement)
+        self.collision_handling(self.collision_manager.process_collisions(movement))
         self.collision_manager.process_touchable()
 
         self.render()
@@ -41,3 +41,7 @@ class Player(GameEntity):
 
     def death(self):
         self.set_pos(self.game.active_scene.level_dic['spawn'][0])
+
+    def collision_handling(self, collision_type):
+        if collision_type['bottom']:
+            self.momentum.jumps = self.momentum.jump_max

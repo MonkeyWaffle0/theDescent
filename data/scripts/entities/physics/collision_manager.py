@@ -45,6 +45,7 @@ class CollisionManager:
         self.reset()
         self.handle_x_movement(movement, self.game.entities.collision_blocks)
         self.handle_y_movement(movement, self.game.entities.collision_blocks)
+        return self.collision_type
 
     def process_touchable(self):
         for obj in self.collision_test(self.entity, self.game.entities.touchables):

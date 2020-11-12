@@ -44,4 +44,4 @@ class Player(GameEntity):
 
     def collision_handling(self, collision_type):
         if collision_type['bottom']:
-            self.momentum.jumps = self.momentum.jump_max
+            self.momentum.land()

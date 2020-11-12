@@ -20,7 +20,7 @@ class InputManager:
         self.just_clicked = False
 
         self.controller_manager = ControllerManager(game)
-        self.controller_deadzone = 20
+        self.controller_deadzone = 30
         self.controller_x = 0
         self.controller_y = 0
         self.A = False

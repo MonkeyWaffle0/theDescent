@@ -14,6 +14,7 @@ class Momentum:
         self.jumping = False
         self.jump_direction = None
         self.speed = 10
+        self.max_speed = 10
         self.air_time = 0
         self.drop_through = 0
 
@@ -53,21 +54,21 @@ class Momentum:
 
     def ground_movement(self):
         if self.game.input.right and not self.game.input.left:
-            self.velocity[0] = min(self.velocity[0] + self.speed, self.speed)
+            self.velocity[0] = min(self.velocity[0] + self.speed, self.max_speed)
         if self.game.input.left and not self.game.input.right:
-            self.velocity[0] = max(self.velocity[0] - self.speed, -self.speed)
+            self.velocity[0] = max(self.velocity[0] - self.speed, -self.max_speed)
 
     def air_movement(self):
         if self.jump_direction == 'right':
             if self.game.input.left:
-                self.velocity[0] = max(self.velocity[0] - self.speed // 4, -self.speed)
+                self.velocity[0] = max(self.velocity[0] - self.speed // 4, -self.max_speed)
             elif self.game.input.right:
-                self.velocity[0] = min(self.velocity[0] + self.speed // 2, self.speed)
+                self.velocity[0] = min(self.velocity[0] + self.speed // 2, self.max_speed)
         elif self.jump_direction == 'left':
             if self.game.input.right:
-                self.velocity[0] = min(self.velocity[0] + self.speed // 4, self.speed)
+                self.velocity[0] = min(self.velocity[0] + self.speed // 4, self.max_speed)
             elif self.game.input.left:
-                self.velocity[0] = max(self.velocity[0] - self.speed // 2, -self.speed)
+                self.velocity[0] = max(self.velocity[0] - self.speed // 2, -self.max_speed)
 
     def progressive_slowdown(self):
         if self.velocity[0] > 0 and not self.game.input.right:
@@ -81,6 +82,10 @@ class Momentum:
         self.air_time = 0
         self.jump_direction = None
 
+    def controller_to_speed(self):
+        self.max_speed = int(abs(self.game.input.controller_x) // 10)
+        print(self.max_speed)
+
     def direction_handling(self):
         if self.velocity[0] > 0:
             self.entity.set_flip(True)
@@ -88,6 +93,10 @@ class Momentum:
             self.entity.set_flip(False)
 
     def update(self):
+        if self.game.input.control_mode == 'controller':
+            self.controller_to_speed()
+        elif self.speed != self.max_speed:
+            self.speed = self.max_speed
         self.jump_handling()
         self.movement_handling()
         self.gravity_handling()

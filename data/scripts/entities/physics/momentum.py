@@ -1,7 +1,7 @@
 class Momentum:
     def __init__(self, game, player):
         self.game = game
-        self.player = player
+        self.entity = player
         self.jumping = False
         self.velocity = [0, 0]
         self.slow_down_speed = 2
@@ -80,6 +80,12 @@ class Momentum:
         self.jumps = self.jump_max
         self.air_time = 0
         self.jump_direction = None
+
+    def direction_handling(self):
+        if self.velocity[0] > 0:
+            self.entity.set_flip(True)
+        if self.velocity[0] < 0:
+            self.entity.set_flip(False)
 
     def update(self):
         self.jump_handling()

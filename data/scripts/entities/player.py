@@ -34,12 +34,6 @@ class Player(GameEntity):
         self.collision_manager.process_collisions(movement)
         self.collision_manager.process_touchable()
 
-        if not self.climbing:
-            if movement[0] > 0:
-                self.set_flip(True)
-            if movement[0] < 0:
-                self.set_flip(False)
-
         self.render()
 
     def render(self):

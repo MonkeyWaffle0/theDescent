@@ -27,4 +27,5 @@ class GameEntity(e.Entity):
         return self.game.entities.player.get_rect().colliderect(self.get_rect())
 
     def get_camera_rect(self):
-        return pygame.Rect(self.x - self.game.active_scene.camera.x, self.y - self.game.active_scene.camera.y, self.width, self.height)
+        return pygame.Rect(self.x - self.game.active_scene.camera.scroll[0],
+                           self.y - self.game.active_scene.camera.scroll[1], self.width, self.height)

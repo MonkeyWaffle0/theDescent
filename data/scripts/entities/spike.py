@@ -31,9 +31,12 @@ class Spike(GameEntity):
 
     def get_camera_points(self):
         return [
-            (self.points[0][0] - self.game.active_scene.camera.x, self.points[0][1] - self.game.active_scene.camera.y),
-            (self.points[1][0] - self.game.active_scene.camera.x, self.points[1][1] - self.game.active_scene.camera.y),
-            (self.points[2][0] - self.game.active_scene.camera.x, self.points[2][1] - self.game.active_scene.camera.y)]
+            (self.points[0][0] - self.game.active_scene.camera.scroll[0],
+             self.points[0][1] - self.game.active_scene.camera.scroll[1]),
+            (self.points[1][0] - self.game.active_scene.camera.scroll[0],
+             self.points[1][1] - self.game.active_scene.camera.scroll[1]),
+            (self.points[2][0] - self.game.active_scene.camera.scroll[0],
+             self.points[2][1] - self.game.active_scene.camera.scroll[1])]
 
     def render(self):
         pygame.draw.polygon(self.display, self.color, self.get_camera_points())

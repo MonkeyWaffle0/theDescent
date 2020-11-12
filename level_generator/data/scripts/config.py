@@ -26,6 +26,12 @@ SPIKE_UP = {'letter': 'M', 'name': 'spike_up', 'color': GRAY, 'direction': 'up'}
 SPIKE_DOWN = {'letter': 'W', 'name': 'spike_down', 'color': GRAY, 'direction': 'down'}
 SPIKE_LEFT = {'letter': 'L', 'name': 'spike_left', 'color': GRAY, 'direction': 'left'}
 SPIKE_RIGHT = {'letter': 'R', 'name': 'spike_right', 'color': GRAY, 'direction': 'right'}
+SPIKES = {
+    SPIKE_UP['letter']: SPIKE_UP,
+    SPIKE_DOWN['letter']: SPIKE_DOWN,
+    SPIKE_LEFT['letter']: SPIKE_LEFT,
+    SPIKE_RIGHT['letter']: SPIKE_RIGHT
+}
 NEXT_LINE = '\n'
 
 pygame.font.init()

@@ -6,10 +6,9 @@ from level_generator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT
 
 
 class Spike(GameEntity):
-    def __init__(self, game, entities, x, y, width, height, char, e_type='spike'):
+    def __init__(self, game, entities, x, y, width, height, direction, e_type='spike'):
         super().__init__(game, entities, e_type, x, y, width, height)
         self.color = GRAY
-        self.direction = char
 
         self.topleft = (self.x, self.y)
         self.topright = (self.x + GRID_SIZE, self.y)
@@ -20,13 +19,13 @@ class Spike(GameEntity):
         self.midleft = (self.x, self.y + GRID_SIZE // 2)
         self.midright = (self.x + GRID_SIZE, self.y + GRID_SIZE // 2)
 
-        if self.direction == SPIKE_UP['letter']:
+        if direction == SPIKE_UP['letter']:
             self.points = [self.bottomleft, self.bottomright, self.midtop]
-        elif self.direction == SPIKE_DOWN['letter']:
+        elif direction == SPIKE_DOWN['letter']:
             self.points = [self.topleft, self.topright, self.midbottom]
-        elif self.direction == SPIKE_LEFT['letter']:
+        elif direction == SPIKE_LEFT['letter']:
             self.points = [self.topright, self.bottomright, self.midleft]
-        elif self.direction == SPIKE_RIGHT['letter']:
+        elif direction == SPIKE_RIGHT['letter']:
             self.points = [self.topleft, self.bottomleft, self.midright]
 
     def get_camera_points(self):

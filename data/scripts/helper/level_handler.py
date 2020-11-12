@@ -4,7 +4,7 @@ from data.scripts.config import BLOCK, GRID_SIZE, NEXT_LINE, LEVEL_PATH, SPAWN, 
 from data.scripts.entities.exit import Exit
 from data.scripts.entities.spike import Spike
 from data.scripts.entities.wall import Wall
-from level_generator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT
+from level_generator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT, SPIKES
 
 
 class LevelHandler:
@@ -29,8 +29,7 @@ class LevelHandler:
             elif char == EXIT['letter']:
                 level_dic[EXIT['name']].append(
                     Exit(self.game, self.game.entities, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
-            elif char == SPIKE_UP['letter'] or char == SPIKE_DOWN['letter'] or char == SPIKE_LEFT['letter'] or char == \
-                    SPIKE_RIGHT['letter']:
+            elif char in SPIKES:
                 level_dic[SPIKE['name']].append(
                     Spike(self.game, self.game.entities, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE, char))
             x += 1

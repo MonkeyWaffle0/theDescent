@@ -11,10 +11,12 @@ class GameScene(Scene):
                           'spawn': [],
                           'exit': []}
         self.level_handler = self.game.level_handler
-
+        self.game.entities.create_player()
+        self.camera = Camera(game)
         self.load_level()
 
     def update(self):
+        self.camera.follow_player()
         self.display.fill(WHITE)
 
     def load_level(self):

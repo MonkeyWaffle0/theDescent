@@ -7,13 +7,10 @@ class Scene:
         self.game = game
         self.display = game.window.display
         self.next = self
-        self.game.entities.create_player()
-        self.camera = Camera(game)
 
     def handle_game_frame(self):
         self.game.input.get_updates()
         self.display.fill(WHITE)
-        self.camera.follow_player()
         self.update()
         self.game.entities.update()
 

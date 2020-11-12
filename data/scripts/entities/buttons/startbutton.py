@@ -7,5 +7,5 @@ class StartButton(Button):
         super().__init__(game, entities, x, y, width, height)
 
     def action(self):
-        self.game.entities.entities.remove(self)
+        self.game.entities.reset_everything()
         self.game.active_scene.switch_to(GameScene(self.game))

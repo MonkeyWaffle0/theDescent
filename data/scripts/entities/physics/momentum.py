@@ -98,6 +98,9 @@ class Momentum:
         else:
             self.air_time += 1
 
+    def ceiling_touch(self):
+        self.velocity[1] = 0
+
     def update(self):
         if self.game.input.control_mode == 'controller':
             self.controller_to_speed()

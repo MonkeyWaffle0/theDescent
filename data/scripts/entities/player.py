@@ -28,9 +28,7 @@ class Player(GameEntity):
                 self.momentum.velocity[1] = -4
 
         self.momentum.update()
-        movement = self.momentum.velocity.copy()
-
-        self.collision_handling(self.collision_manager.process_collisions(movement))
+        self.collision_handling(self.collision_manager.process_collisions(self.momentum.velocity))
         self.collision_manager.process_touchable()
 
         self.render()
@@ -46,3 +44,5 @@ class Player(GameEntity):
             self.momentum.land()
         else:
             self.momentum.air_time_handling()
+        if collision_type['top']:
+            self.momentum.ceiling_touch()

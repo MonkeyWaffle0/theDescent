@@ -11,7 +11,7 @@ class Exit(GameEntity):
         self.color = BLUE
 
     def render(self):
-        pygame.draw.rect(self.display, self.color, self.get_rect())
+        pygame.draw.rect(self.display, self.color, self.get_camera_rect())
 
     def next_level(self):
         print('yes ma gueule')

@@ -1,4 +1,5 @@
 from data.scripts.scenes.scene import Scene, WHITE
+from data.scripts.ui.camera import Camera
 
 
 class GameScene(Scene):
@@ -6,7 +7,6 @@ class GameScene(Scene):
         super().__init__(game)
         self.game = game
         self.display = game.window.display
-        self.game.entities.create_player()
         self.level_dic = {'blocks': [],
                           'spawn': [],
                           'exit': []}

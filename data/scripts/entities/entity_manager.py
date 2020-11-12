@@ -1,7 +1,6 @@
-from data.scripts.entities.collision_lists import CollisionLists
 import data.scripts.rapid_potato.entities as e
-from data.scripts.config import *
 from data.scripts.core_funcs import *
+from data.scripts.entities.collision_lists import CollisionLists
 from data.scripts.entities.player import Player
 
 
@@ -28,4 +27,4 @@ class EntityManager:
             entity.update()
 
     def create_player(self):
-        self.player = Player(self.game, self, 'player', 100, 300, GRID_SIZE, GRID_SIZE)
+        self.player = Player(self.game, self, 'player', -50, -50, GRID_SIZE, GRID_SIZE)

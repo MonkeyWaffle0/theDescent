@@ -57,7 +57,7 @@ class Player(GameEntity):
         self.render()
 
     def render(self):
-        pygame.draw.rect(self.display, self.color, self.get_rect())
+        pygame.draw.rect(self.display, self.color, self.get_camera_rect())
 
     def death(self):
         self.set_pos(self.game.active_scene.level_dic['spawn'][0])

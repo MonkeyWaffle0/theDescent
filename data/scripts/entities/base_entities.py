@@ -1,3 +1,5 @@
+import pygame
+
 import data.scripts.rapid_potato.entities as e
 from data.scripts.entities.physics.momentum import Momentum
 
@@ -23,3 +25,6 @@ class GameEntity(e.Entity):
 
     def player_is_on(self):
         return self.game.entities.player.get_rect().colliderect(self.get_rect())
+
+    def get_camera_rect(self):
+        return pygame.Rect(self.x - self.game.active_scene.camera.x, self.y - self.game.active_scene.camera.y, self.width, self.height)

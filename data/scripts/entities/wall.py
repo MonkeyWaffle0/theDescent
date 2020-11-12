@@ -11,4 +11,4 @@ class Wall(GameEntity):
         self.game.entities.collisions.collision_tiles.append(self.get_rect())
 
     def update(self):
-        pygame.draw.rect(self.display, self.color, self.get_rect())
+        pygame.draw.rect(self.display, self.color, self.get_camera_rect())

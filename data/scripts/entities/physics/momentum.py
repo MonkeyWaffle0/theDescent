@@ -84,7 +84,6 @@ class Momentum:
 
     def controller_to_speed(self):
         self.max_speed = int(abs(self.game.input.controller_x) // 10)
-        print(self.max_speed)
 
     def direction_handling(self):
         if self.velocity[0] > 0:
@@ -104,8 +103,8 @@ class Momentum:
     def update(self):
         if self.game.input.control_mode == 'controller':
             self.controller_to_speed()
-        elif self.speed != self.max_speed:
-            self.speed = self.max_speed
+        elif self.max_speed != self.speed:
+            self.max_speed = self.speed
         self.jump_handling()
         self.movement_handling()
         self.gravity_handling()

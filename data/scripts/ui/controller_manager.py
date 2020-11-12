@@ -25,10 +25,11 @@ class ControllerManager:
             self.game.input.control_mode = 'controller'
 
     def wait_for_reconnect(self):
-        joystick_count = pygame.joystick.get_count()
-        if joystick_count:
+        if pygame.joystick.get_count():
             self.is_plugged = True
             self.joysticks = self.get_joysticks()
+        elif self.game.input.enter:
+            self.game.input.control_mode = 'keyboard'
 
     def get_joysticks(self):
         joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]

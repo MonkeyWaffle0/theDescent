@@ -15,7 +15,7 @@ class ReconnectController:
         self.game.active_scene.handle_game_frame()
 
         self.game.input.controller_manager.wait_for_reconnect()
-        if self.game.input.controller_manager.is_plugged:
+        if self.game.input.controller_manager.is_plugged or self.game.input.control_mode == 'keyboard':
             self.game.render_mode = 'game'
 
         mask_surf = pygame.Surface(DISPLAY_SIZE)

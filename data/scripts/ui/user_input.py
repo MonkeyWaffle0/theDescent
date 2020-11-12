@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+from data.scripts.config import RECONNECT_CONTROLLER
 from data.scripts.ui.controller_manager import ControllerManager
 
 
@@ -18,6 +19,7 @@ class InputManager:
         self.up = False
         self.left_click = False
         self.just_clicked = False
+        self.enter = False
 
         self.controller_manager = ControllerManager(game)
         self.controller_deadzone = 30
@@ -48,6 +50,7 @@ class InputManager:
         self.left_click = False
         self.just_clicked = False
         self.jump = False
+        self.enter = False
 
         self.mouse_pos = pygame.mouse.get_pos()
         self.mouse_pos = [self.mouse_pos[0], self.mouse_pos[1]]
@@ -112,6 +115,8 @@ class InputManager:
             self.left_click = False
 
     def handle_controller_input(self, event):
+        if self.game.render_mode == RECONNECT_CONTROLLER and event.type == KEYDOWN and event.key == K_RETURN:
+            self.enter = True
         if event.type == JOYBUTTONDOWN:
             if event.button == 0:
                 self.jump = True

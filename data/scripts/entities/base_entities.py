@@ -1,6 +1,7 @@
 import pygame
 
 import data.scripts.rapid_potato.entities as e
+from data.scripts.entities.physics.collision_manager import CollisionManager
 from data.scripts.entities.physics.momentum import Momentum
 
 
@@ -11,14 +12,10 @@ class GameEntity(e.Entity):
         self.display = game.window.display
         self.entities_ptr = entities
         self.momentum = Momentum(game, self)
+        self.collision_manager = CollisionManager(game, self)
         self.in_water = False
         self.game.entities.entities.append(self)
         self.visible = True
-
-    def process_collisions(self, movement):
-        return self.move(movement, self.game.entities.collisions.collision_tiles,
-                         self.game.entities.collisions.collision_ramps,
-                         self.game.entities.collisions.collision_platforms)
 
     def mouse_is_on(self):
         return self.get_rect().collidepoint(self.game.input.mouse_pos)

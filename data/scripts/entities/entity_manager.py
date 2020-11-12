@@ -7,7 +7,7 @@ from data.scripts.entities.player import Player
 class EntityManager:
     def __init__(self, game):
         self.game = game
-        self.collisions = CollisionLists()
+        self.collision_blocks = []
 
         e.set_global_colorkey((0, 0, 0))
         e.load_animations2('data/images/animations')
@@ -25,6 +25,10 @@ class EntityManager:
     def update(self):
         for entity in self.entities:
             entity.update()
+
+    def reset(self):
+        self.collision_blocks = []
+        self.entities = []
 
     def create_player(self):
         self.player = Player(self.game, self, 'player', -50, -50, GRID_SIZE, GRID_SIZE)

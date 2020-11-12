@@ -18,11 +18,7 @@ KNOWN_TAGS = ['loop']
 
 # 2d collisions test
 def collision_test(object_1, object_list):
-    collision_list = []
-    for obj in object_list:
-        if obj.colliderect(object_1):
-            collision_list.append(obj)
-    return collision_list
+    return [obj for obj in object_list if obj.colliderect(object_1)]
 
 
 # 2d physics object
@@ -70,32 +66,7 @@ class PhysicsObj(object):
             collision_types['data'].append([block, markers])
             self.change_y = 0
             self.y = self.rect.y
-        for ramp in ramps:
-            if self.rect.colliderect(ramp[1]):
-                if ramp[0] == 1:  # up-right ramp
-                    ramp_pos = self.rect.right - ramp[1].x
-                    ramp_pos = min(ramp_pos, ramp[1].width)
-                    ramp_pos = max(ramp_pos, 0)
-                    ramp_border = ramp[1].y + (ramp[1].height - ramp_pos)
-                    if self.rect.bottom > ramp_border:
-                        collision_types['bottom'] = True
-                        self.rect.bottom = ramp_border
-                        self.y = self.rect.y
-                if ramp[0] == 2:
-                    ramp_pos = self.rect.x - ramp[1].x
-                    ramp_pos = min(ramp_pos, ramp[1].width)
-                    ramp_pos = max(ramp_pos, 0)
-                    ramp_border = ramp[1].y + ramp_pos
-                    if self.rect.bottom > ramp_border:
-                        collision_types['bottom'] = True
-                        self.rect.bottom = ramp_border
-                        self.y = self.rect.y
-        for platform in thin_platforms:
-            if self.rect.colliderect(platform):
-                if orig_y + self.rect.height - 1 < platform.y:
-                    self.rect.bottom = platform.y
-                    collision_types['bottom'] = True
-                    self.y = self.rect.y
+
         return collision_types
 
 
@@ -150,7 +121,7 @@ class Entity(object):
         self.original_x = x
         self.width = width
         self.height = height
-        self.obj = PhysicsObj(x, y, width, height)
+        self.rect = pygame.Rect(x, y, self.width, self.height)
         self.animation = None
         self.image = None
         self.animation_frame = 0
@@ -171,22 +142,12 @@ class Entity(object):
         y = loc[1]
         self.x = x
         self.y = y
-        self.obj.x = x
-        self.obj.y = y
-        self.obj.rect.x = x
-        self.obj.rect.y = y
 
     def update_variable(self, x, y, width, height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-
-    def move(self, momentum, platforms, ramps, thin_platforms):
-        collisions = self.obj.move(momentum, platforms, ramps, thin_platforms)
-        self.x = self.obj.x
-        self.y = self.obj.y
-        return collisions
 
     def get_rect(self):
         return pygame.Rect(self.x, self.y, self.width, self.height)

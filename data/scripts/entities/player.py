@@ -31,22 +31,7 @@ class Player(GameEntity):
         self.momentum.air_time += 1
         movement = self.momentum.velocity.copy()
 
-        collision_info = self.process_collisions(movement)
-
-        if collision_info['bottom']:
-            self.momentum.land()
-
-        if self.momentum.air_time > 4:
-            if self.animation_progress < 0.7:
-                if movement[1] < 0:
-                    self.set_action('jump')
-                else:
-                    self.set_action('fall')
-        else:
-            if movement[0] != 0:
-                self.set_action('run')
-            else:
-                self.set_action('idle')
+        self.collision_manager.process_collisions(movement)
 
         if not self.climbing:
             if movement[0] > 0:

@@ -28,7 +28,6 @@ class Player(GameEntity):
                 self.momentum.velocity[1] = -4
 
         self.momentum.update()
-        self.momentum.air_time += 1
         movement = self.momentum.velocity.copy()
 
         self.collision_handling(self.collision_manager.process_collisions(movement))
@@ -45,3 +44,5 @@ class Player(GameEntity):
     def collision_handling(self, collision_type):
         if collision_type['bottom']:
             self.momentum.land()
+        else:
+            self.momentum.air_time_handling()

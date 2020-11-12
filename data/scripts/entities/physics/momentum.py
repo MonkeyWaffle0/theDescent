@@ -92,6 +92,12 @@ class Momentum:
         if self.velocity[0] < 0:
             self.entity.set_flip(False)
 
+    def air_time_handling(self):
+        if self.air_time == 0 and self.jumps == self.jump_max:
+            self.jumps -= 1
+        else:
+            self.air_time += 1
+
     def update(self):
         if self.game.input.control_mode == 'controller':
             self.controller_to_speed()

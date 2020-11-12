@@ -5,7 +5,8 @@ class CollisionManager:
         self.collision_type = {'right': False, 'left': False, 'top': False, 'bottom': False}
 
     def reset(self):
-        self.collision_type = {'right': False, 'left': False, 'top': False, 'bottom': False}
+        for key in self.collision_type:
+            self.collision_type[key] = False
 
     @staticmethod
     def collision_test(object_1, object_list):

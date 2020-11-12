@@ -1,5 +1,3 @@
-import json
-
 from data.scripts.core_funcs import *
 
 global e_colorkey
@@ -14,89 +12,7 @@ def set_global_colorkey(colorkey):
 KNOWN_TAGS = ['loop']
 
 
-# physics core
-
-# 2d collisions test
-def collision_test(object_1, object_list):
-    return [obj for obj in object_list if obj.colliderect(object_1)]
-
-
-# 2d physics object
-class PhysicsObj(object):
-    def __init__(self, x, y, x_size, y_size):
-        self.width = x_size
-        self.height = y_size
-        self.rect = pygame.Rect(x, y, self.width, self.height)
-        self.x = x
-        self.y = y
-
-    def move(self, movement, platforms, ramps, thin_platforms):
-        orig_y = self.y
-        self.x += movement[0]
-        self.rect.x = int(self.x)
-        block_hit_list = collision_test(self.rect, platforms)
-        collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False, 'slant_bottom': False,
-                           'data': []}
-        # added collision data to "collision_types". ignore the poorly chosen variable name
-        for block in block_hit_list:
-            markers = [False, False, False, False]
-            if movement[0] > 0:
-                self.rect.right = block.left
-                collision_types['right'] = True
-                markers[0] = True
-            elif movement[0] < 0:
-                self.rect.left = block.right
-                collision_types['left'] = True
-                markers[1] = True
-            collision_types['data'].append([block, markers])
-            self.x = self.rect.x
-        self.y += movement[1]
-        self.rect.y = int(self.y)
-        block_hit_list = collision_test(self.rect, platforms)
-        for block in block_hit_list:
-            markers = [False, False, False, False]
-            if movement[1] > 0:
-                self.rect.bottom = block.top
-                collision_types['bottom'] = True
-                markers[2] = True
-            elif movement[1] < 0:
-                self.rect.top = block.bottom
-                collision_types['top'] = True
-                markers[3] = True
-            collision_types['data'].append([block, markers])
-            self.change_y = 0
-            self.y = self.rect.y
-
-        return collision_types
-
-
-class Cuboid(object):
-    def __init__(self, x, y, z, x_size, y_size, z_size):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.x_size = x_size
-        self.y_size = y_size
-        self.z_size = z_size
-
-    def set_pos(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-
-    def collidecuboid(self, cuboid_2):
-        cuboid_1_xy = pygame.Rect(self.x, self.y, self.x_size, self.y_size)
-        cuboid_1_yz = pygame.Rect(self.y, self.z, self.y_size, self.z_size)
-        cuboid_2_xy = pygame.Rect(cuboid_2.x, cuboid_2.y, cuboid_2.x_size, cuboid_2.y_size)
-        cuboid_2_yz = pygame.Rect(cuboid_2.y, cuboid_2.z, cuboid_2.y_size, cuboid_2.z_size)
-        if (cuboid_1_xy.colliderect(cuboid_2_xy)) and (cuboid_1_yz.colliderect(cuboid_2_yz)):
-            return True
-        else:
-            return False
-
-
 # entity stuff
-
 def simple_entity(x, y, e_type):
     return Entity(x, y, 1, 1, e_type)
 
@@ -114,7 +30,7 @@ def blit_center(surf, surf2, pos):
 class Entity(object):
     global animation_database, animation_higher_database
 
-    def __init__(self, x, y, width, height, e_type):  # x, y, width, height, type
+    def __init__(self, x, y, width, height, e_type):
         self.x = x
         self.y = y
         self.original_y = y

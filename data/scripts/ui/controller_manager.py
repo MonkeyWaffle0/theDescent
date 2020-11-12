@@ -7,10 +7,7 @@ class ControllerManager:
     def __init__(self, game):
         self.game = game
 
-        self.joysticks = []
-        for i in range(pygame.joystick.get_count()):
-            self.joysticks.append(pygame.joystick.Joystick(i))
-            self.joysticks[-1].init()
+        self.joysticks = self.get_joysticks()
 
         if self.joysticks:
             self.is_plugged = True
@@ -22,14 +19,20 @@ class ControllerManager:
         if not joystick_count and self.is_plugged:
             self.is_plugged = False
             self.game.render_mode = RECONNECT_CONTROLLER
+        if joystick_count and not self.is_plugged:
+            self.joysticks = self.get_joysticks()
+            self.is_plugged = True
+            self.game.input.control_mode = 'controller'
 
     def wait_for_reconnect(self):
         joystick_count = pygame.joystick.get_count()
         if joystick_count:
             self.is_plugged = True
-            joysticks = []
-            for i in range(pygame.joystick.get_count()):
-                joysticks.append(pygame.joystick.Joystick(i))
-                joysticks[-1].init()
-                self.joysticks = joysticks
+            self.joysticks = self.get_joysticks()
+
+    def get_joysticks(self):
+        joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
+        for joystick in joysticks:
+            joystick.init()
+        return joysticks
 

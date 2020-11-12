@@ -52,13 +52,14 @@ class InputManager:
         self.mouse_pos = pygame.mouse.get_pos()
         self.mouse_pos = [self.mouse_pos[0], self.mouse_pos[1]]
 
+        self.controller_manager.check_plug()
+
         pressed_keys = pygame.key.get_pressed()
         for event in pygame.event.get():
             self.filter_quit_event(pressed_keys, event)
             if self.control_mode == 'keyboard':
                 self.handle_keyboard_input(event)
             elif self.control_mode == 'controller':
-                self.controller_manager.check_plug()
                 self.handle_controller_input(event)
                 self.joystick_to_input()
 

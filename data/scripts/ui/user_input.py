@@ -25,7 +25,7 @@ class InputManager:
         self.controller_y = 0
         self.A = False
 
-        self.control_mode = 'keyboard'
+        self.control_mode = 'controller'
 
         self.mouse_pos = pygame.mouse.get_pos()
         self.mouse_pos = [self.mouse_pos[0], self.mouse_pos[1]]

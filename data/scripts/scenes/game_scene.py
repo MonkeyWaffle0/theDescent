@@ -18,4 +18,4 @@ class GameScene(Scene):
         self.display.fill(WHITE)
 
     def load_level(self):
-        self.level_dic = self.level_handler.load_level('test')
+        self.level_dic = self.level_handler.load_level('level1')

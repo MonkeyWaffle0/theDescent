@@ -2,7 +2,6 @@ import pygame
 
 from data.scripts.helper.level_handler import LevelHandler
 from data.scripts.scenes.main_menu import MainMenu
-from data.scripts.ui.camera import Camera
 from data.scripts.ui.gui import GUI
 from data.scripts.ui.user_input import InputManager
 

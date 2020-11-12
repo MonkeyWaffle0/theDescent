@@ -11,6 +11,6 @@ class GameWindow:
         self.size = DISPLAY_SIZE
 
     def update(self, game):
-        self.screen.blit(pygame.transform.scale(self.display, self.screen.get_size()), (0, 0))
+        self.screen.blit(self.display, (0, 0))
         pygame.display.update()
         game.clock.tick(60)

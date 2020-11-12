@@ -35,6 +35,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (200, 200, 200)
 DARK_GRAY = (50, 50, 50)
+ORANGE = (255, 100, 10)
 
 BLOCK = {'letter': 'B', 'name': 'blocks', 'color': BLACK}
 NOTHING = 'N'

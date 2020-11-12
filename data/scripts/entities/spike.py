@@ -2,6 +2,7 @@ import pygame
 
 from data.scripts.config import GRAY, GRID_SIZE
 from data.scripts.entities.base_entities import GameEntity
+from data.scripts.entities.player import Player
 from level_generator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT
 
 
@@ -9,6 +10,7 @@ class Spike(GameEntity):
     def __init__(self, game, entities, x, y, width, height, direction, e_type='spike'):
         super().__init__(game, entities, e_type, x, y, width, height)
         self.color = GRAY
+        self.game.entities.touchables.append(self)
 
         self.topleft = (self.x, self.y)
         self.topright = (self.x + GRID_SIZE, self.y)
@@ -40,10 +42,8 @@ class Spike(GameEntity):
     def render(self):
         pygame.draw.polygon(self.display, self.color, self.get_camera_points())
 
-    def kill(self):
-        return self.game.entities.player.death()
+    def interact(self, entity):
+        return entity.death()
 
     def update(self):
         self.render()
-        if self.player_is_on():
-            return self.kill()

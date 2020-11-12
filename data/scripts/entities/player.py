@@ -32,6 +32,7 @@ class Player(GameEntity):
         movement = self.momentum.velocity.copy()
 
         self.collision_manager.process_collisions(movement)
+        self.collision_manager.process_touchable()
 
         if not self.climbing:
             if movement[0] > 0:

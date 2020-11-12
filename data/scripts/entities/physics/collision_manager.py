@@ -10,7 +10,7 @@ class CollisionManager:
 
     @staticmethod
     def collision_test(object_1, object_list):
-        return [obj for obj in object_list if obj.colliderect(object_1)]
+        return [obj for obj in object_list if obj.get_rect().colliderect(object_1)]
 
     def handle_x_movement(self, movement, platforms):
         self.entity.x += movement[0]
@@ -19,10 +19,10 @@ class CollisionManager:
 
         for block in block_hit_list:
             if movement[0] > 0:
-                self.entity.rect.right = block.left
+                self.entity.rect.right = block.get_rect().left
                 self.collision_type['right'] = True
             elif movement[0] < 0:
-                self.entity.rect.left = block.right
+                self.entity.rect.left = block.get_rect().right
                 self.collision_type['left'] = True
             self.entity.x = self.entity.rect.x
 
@@ -33,10 +33,10 @@ class CollisionManager:
 
         for block in block_hit_list:
             if movement[1] > 0:
-                self.entity.rect.bottom = block.top
+                self.entity.rect.bottom = block.get_rect().top
                 self.collision_type['bottom'] = True
             elif movement[1] < 0:
-                self.entity.rect.top = block.bottom
+                self.entity.rect.top = block.get_rect().bottom
                 self.collision_type['top'] = True
             self.entity.change_y = 0
             self.entity.y = self.entity.rect.y
@@ -45,3 +45,7 @@ class CollisionManager:
         self.reset()
         self.handle_x_movement(movement, self.game.entities.collision_blocks)
         self.handle_y_movement(movement, self.game.entities.collision_blocks)
+
+    def process_touchable(self):
+        for obj in self.collision_test(self.entity, self.game.entities.touchables):
+            obj.interact(self.entity)

@@ -6,6 +6,7 @@ class Scene:
         self.game = game
         self.display = game.window.display
         self.next = self
+        self.camera_mode = False
 
     def handle_game_frame(self):
         self.game.input.get_updates()

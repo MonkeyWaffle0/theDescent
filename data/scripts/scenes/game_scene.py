@@ -12,6 +12,7 @@ class GameScene(Scene):
                           'exit': []}
         self.level_handler = self.game.level_handler
         self.game.entities.create_player()
+        self.camera_mode = True
         self.camera = Camera(game)
         self.load_level()
 

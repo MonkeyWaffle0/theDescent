@@ -33,4 +33,4 @@ class EntityManager:
                 entity.update()
 
     def create_player(self):
-        self.player = Player(self.game, self, 'player', -50, -50, GRID_SIZE, GRID_SIZE)
+        self.player = Player(self.game, self, 'player', 0, 0, GRID_SIZE, GRID_SIZE)

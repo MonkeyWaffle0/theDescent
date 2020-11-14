@@ -19,14 +19,13 @@ class DrunkWalker:
         return self.grid
 
     def random_move(self):
-        return choice([pos for pos in self.grid.check_around(self.current) if pos])
+        return choice([pos for pos in self.grid.check_around(self.current).values() if pos])
 
     def check_grid(self, max_rooms):
         count = 0
         for room in self.grid:
             if room == TAKEN:
                 count += 1
-
         return count == max_rooms
 
 

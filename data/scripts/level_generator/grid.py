@@ -17,6 +17,14 @@ class Grid:
             for room in row:
                 yield room
 
+    def __str__(self):
+        string = ''
+        for row in self.grid:
+            for char in row:
+                string += str(char)
+            string += '\n'
+        return string
+
     def check_top(self, point):
         if point[0] == 0:
             return None
@@ -27,19 +35,19 @@ class Grid:
         if point[0] == self.height:
             return None
         else:
-            return self.get_top(point)
+            return self.get_bottom(point)
 
     def check_left(self, point):
         if point[1] == 0:
             return None
         else:
-            return self.get_top(point)
+            return self.get_left(point)
 
     def check_right(self, point):
         if point[1] == self.width:
             return None
         else:
-            return self.get_top(point)
+            return self.get_right(point)
 
     def check_bottom_right(self, point):
         return point[0] == self.height or point[1] == self.width or self.get_grid_right(self.get_bottom(point)) != EMPTY

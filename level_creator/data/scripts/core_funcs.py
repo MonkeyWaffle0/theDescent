@@ -4,10 +4,14 @@ import pickle
 
 import pygame
 
-from data.scripts.level_generator.config import SMALL_SQUARE_SHAPE, VERTICAL_SHAPE
+from data.scripts.level_generator.config import SMALL_SQUARE_SHAPE, VERTICAL_SHAPE, HORIZONTAL_SHAPE, BIG_SQUARE_SHAPE
 from level_creator.data.scripts.config import GRID_SIZE, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH, SMALL_LEFT_INDEX, \
     SMALL_RIGHT_INDEX, SMALL_BOTTOM_INDEX, SMALL_TOP_INDEX, VERTICAL_TOP_INDEX, VERTICAL_BOTTOM_INDEX, \
-    VERTICAL_TOPLEFT_INDEX, VERTICAL_TOPRIGHT_INDEX, VERTICAL_BOTTOMRIGHT_INDEX, VERTICAL_BOTTOMLEFT_INDEX
+    VERTICAL_TOPLEFT_INDEX, VERTICAL_TOPRIGHT_INDEX, VERTICAL_BOTTOMRIGHT_INDEX, VERTICAL_BOTTOMLEFT_INDEX, \
+    HORIZONTAL_LEFT_INDEX, HORIZONTAL_RIGHT_INDEX, HORIZONTAL_TOPLEFT_INDEX, HORIZONTAL_TOPRIGHT_INDEX, \
+    HORIZONTAL_BOTTOMLEFT_INDEX, HORIZONTAL_BOTTOMRIGHT_INDEX, BIG_TOPLEFT_TOP_INDEX, BIG_TOPLEFT_LEFT_INDEX, \
+    BIG_TOPRIGHT_TOP_INDEX, BIG_TOPRIGHT_RIGHT_INDEX, BIG_BOTTOMLEFT_BOTTOM_INDEX, BIG_BOTTOMLEFT_LEFT_INDEX, \
+    BIG_BOTTOMRIGHT_BOTTOM_INDEX, BIG_BOTTOMRIGHT_RIGHT_INDEX
 
 
 def read_f(path):
@@ -155,6 +159,8 @@ def level_to_string(level):
 
 
 def level_to_pickle(level, name):
+    level['doors'] = get_doors(level)
+    print(level['doors'])
     with open(LEVEL_PATH + name + '.pickle', 'wb') as file:
         pickle.dump(level, file)
 
@@ -165,31 +171,68 @@ def save_level(level, name):
 
 
 def get_doors(level):
+    doors = {}
     if level['shape'] == SMALL_SQUARE_SHAPE:
         doors = {'top': False, 'bottom': False, 'left': False, 'right': False}
-        if level['string'][SMALL_LEFT_INDEX] != NOTHING:
+        if level['string'][SMALL_LEFT_INDEX] == NOTHING:
             doors['left'] = True
-        if level['string'][SMALL_RIGHT_INDEX] != NOTHING:
+        if level['string'][SMALL_RIGHT_INDEX] == NOTHING:
             doors['right'] = True
-        if level['string'][SMALL_BOTTOM_INDEX] != NOTHING:
+        if level['string'][SMALL_BOTTOM_INDEX] == NOTHING:
             doors['bottom'] = True
-        if level['string'][SMALL_TOP_INDEX] != NOTHING:
+        if level['string'][SMALL_TOP_INDEX] == NOTHING:
             doors['top'] = True
     elif level['shape'] == VERTICAL_SHAPE:
         doors = {'top': False, 'bottom': False, 'topleft': False, 'topright': False, 'bottomleft': False,
                  'bottomright': False}
-        if level['string'][VERTICAL_TOP_INDEX] != NOTHING:
+        if level['string'][VERTICAL_TOP_INDEX] == NOTHING:
             doors['top'] = True
-        if level['string'][VERTICAL_BOTTOM_INDEX] != NOTHING:
+        if level['string'][VERTICAL_BOTTOM_INDEX] == NOTHING:
             doors['bottom'] = True
-        if level['string'][VERTICAL_TOPLEFT_INDEX] != NOTHING:
+        if level['string'][VERTICAL_TOPLEFT_INDEX] == NOTHING:
             doors['topleft'] = True
-        if level['string'][VERTICAL_TOPRIGHT_INDEX] != NOTHING:
+        if level['string'][VERTICAL_TOPRIGHT_INDEX] == NOTHING:
             doors['topright'] = True
-        if level['string'][VERTICAL_BOTTOMLEFT_INDEX] != NOTHING:
+        if level['string'][VERTICAL_BOTTOMLEFT_INDEX] == NOTHING:
             doors['bottomleft'] = True
-        if level['string'][VERTICAL_BOTTOMRIGHT_INDEX] != NOTHING:
+        if level['string'][VERTICAL_BOTTOMRIGHT_INDEX] == NOTHING:
             doors['bottomright'] = True
+    elif level['shape'] == HORIZONTAL_SHAPE:
+        doors = {'left': False, 'right': False, 'topleft': False, 'topright': False, 'bottomleft': False,
+                 'bottomright': False}
+        if level['string'][HORIZONTAL_LEFT_INDEX] == NOTHING:
+            doors['left'] = True
+        if level['string'][HORIZONTAL_RIGHT_INDEX] == NOTHING:
+            doors['right'] = True
+        if level['string'][HORIZONTAL_TOPLEFT_INDEX] == NOTHING:
+            doors['topleft'] = True
+        if level['string'][HORIZONTAL_TOPRIGHT_INDEX] == NOTHING:
+            doors['topright'] = True
+        if level['string'][HORIZONTAL_BOTTOMLEFT_INDEX] == NOTHING:
+            doors['bottomleft'] = True
+        if level['string'][HORIZONTAL_BOTTOMRIGHT_INDEX] == NOTHING:
+            doors['bottomright'] = True
+    elif level['shape'] == BIG_SQUARE_SHAPE:
+        doors = {'topleft_top': False, 'topleft_left': False, 'bottomleft_bottom': False, 'bottomleft_left': False,
+                 'topright_top': False,
+                 'topright_right': False, 'bottomright_bottom': False, 'bottomright_right': False}
+        if level['string'][BIG_TOPLEFT_TOP_INDEX] == NOTHING:
+            doors['topleft_top'] = True
+        if level['string'][BIG_TOPLEFT_LEFT_INDEX] == NOTHING:
+            doors['topleft_left'] = True
+        if level['string'][BIG_TOPRIGHT_TOP_INDEX] == NOTHING:
+            doors['topright_top'] = True
+        if level['string'][BIG_TOPRIGHT_RIGHT_INDEX] == NOTHING:
+            doors['topright_right'] = True
+        if level['string'][BIG_BOTTOMLEFT_BOTTOM_INDEX] == NOTHING:
+            doors['bottomleft_bottom'] = True
+        if level['string'][BIG_BOTTOMLEFT_LEFT_INDEX] == NOTHING:
+            doors['bottomleft_left'] = True
+        if level['string'][BIG_BOTTOMRIGHT_BOTTOM_INDEX] == NOTHING:
+            doors['bottomright_bottom'] = True
+        if level['string'][BIG_BOTTOMRIGHT_RIGHT_INDEX] == NOTHING:
+            doors['bottomright_right'] = True
+    return doors
 
 
 def load_level(game):

@@ -44,7 +44,7 @@ SPAWN = {'letter': 'S', 'name': 'spawn', 'color': GREEN}
 SPIKE = {'letter': 'W', 'name': 'spike', 'color': GRAY}
 NEXT_LINE = '\n'
 
-LEVEL_PATH = "level_generator/data/saved_levels/"
+LEVEL_PATH = "level_creator/data/saved_levels/"
 
 # render modes
 GAME = 'game'

@@ -4,8 +4,10 @@ import pickle
 
 import pygame
 
-from data.scripts.level_generator.config import SMALL_SQUARE_SHAPE
-from level_creator.data.scripts.config import GRID_SIZE, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH
+from data.scripts.level_generator.config import SMALL_SQUARE_SHAPE, VERTICAL_SHAPE
+from level_creator.data.scripts.config import GRID_SIZE, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH, SMALL_LEFT_INDEX, \
+    SMALL_RIGHT_INDEX, SMALL_BOTTOM_INDEX, SMALL_TOP_INDEX, VERTICAL_TOP_INDEX, VERTICAL_BOTTOM_INDEX, \
+    VERTICAL_TOPLEFT_INDEX, VERTICAL_TOPRIGHT_INDEX, VERTICAL_BOTTOMRIGHT_INDEX, VERTICAL_BOTTOMLEFT_INDEX
 
 
 def read_f(path):
@@ -40,18 +42,18 @@ def warp_surf(surface, mask, loc, shift):
     surface.blit(subsurf, (loc[0] + shift[0], loc[1] + shift[1]))
 
 
-def swap_color(img,old_c,new_c):
+def swap_color(img, old_c, new_c):
     global e_colorkey
     img.set_colorkey(old_c)
     surf = img.copy()
     surf.fill(new_c)
-    surf.blit(img,(0,0))
+    surf.blit(img, (0, 0))
     return surf
 
 
-def clip(surf,x,y,x_size,y_size):
+def clip(surf, x, y, x_size, y_size):
     handle_surf = surf.copy()
-    clipR = pygame.Rect(x,y,x_size, y_size)
+    clipR = pygame.Rect(x, y, x_size, y_size)
     handle_surf.set_clip(clipR)
     image = surf.subsurface(handle_surf.get_clip())
     return image.copy()
@@ -95,8 +97,8 @@ def horizontal_crop(loc_x, width, img):
         left_sec = img.get_width() - loc_x
         right_sec = width - left_sec
         output_surf = pygame.Surface((width, img.get_height()))
-        output_surf.blit(clip(img, loc_x, 0, left_sec, img.get_height()), (0,0))
-        output_surf.blit(clip(img, 0, 0, right_sec, img.get_height()), (left_sec,0))
+        output_surf.blit(clip(img, loc_x, 0, left_sec, img.get_height()), (0, 0))
+        output_surf.blit(clip(img, 0, 0, right_sec, img.get_height()), (left_sec, 0))
         colorkey = img.get_colorkey()
         output_surf.set_colorkey(colorkey)
         return output_surf
@@ -164,7 +166,30 @@ def save_level(level, name):
 
 def get_doors(level):
     if level['shape'] == SMALL_SQUARE_SHAPE:
-
+        doors = {'top': False, 'bottom': False, 'left': False, 'right': False}
+        if level['string'][SMALL_LEFT_INDEX] != NOTHING:
+            doors['left'] = True
+        if level['string'][SMALL_RIGHT_INDEX] != NOTHING:
+            doors['right'] = True
+        if level['string'][SMALL_BOTTOM_INDEX] != NOTHING:
+            doors['bottom'] = True
+        if level['string'][SMALL_TOP_INDEX] != NOTHING:
+            doors['top'] = True
+    elif level['shape'] == VERTICAL_SHAPE:
+        doors = {'top': False, 'bottom': False, 'topleft': False, 'topright': False, 'bottomleft': False,
+                 'bottomright': False}
+        if level['string'][VERTICAL_TOP_INDEX] != NOTHING:
+            doors['top'] = True
+        if level['string'][VERTICAL_BOTTOM_INDEX] != NOTHING:
+            doors['bottom'] = True
+        if level['string'][VERTICAL_TOPLEFT_INDEX] != NOTHING:
+            doors['topleft'] = True
+        if level['string'][VERTICAL_TOPRIGHT_INDEX] != NOTHING:
+            doors['topright'] = True
+        if level['string'][VERTICAL_BOTTOMLEFT_INDEX] != NOTHING:
+            doors['bottomleft'] = True
+        if level['string'][VERTICAL_BOTTOMRIGHT_INDEX] != NOTHING:
+            doors['bottomright'] = True
 
 
 def load_level(game):

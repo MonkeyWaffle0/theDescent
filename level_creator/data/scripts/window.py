@@ -5,7 +5,7 @@ from level_creator.data.scripts.config import DISPLAY_SIZE
 
 class GameWindow:
     def __init__(self):
-        self.screen = pygame.display.set_mode([DISPLAY_SIZE[0], DISPLAY_SIZE[1]], 0, 32)
+        self.screen = pygame.display.set_mode([DISPLAY_SIZE[0], DISPLAY_SIZE[1]])
 
         self.display = pygame.Surface(DISPLAY_SIZE)
         self.size = DISPLAY_SIZE

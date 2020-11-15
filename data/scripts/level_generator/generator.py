@@ -13,7 +13,7 @@ class Generator:
         self.drunk_walker = DrunkWalker(self.grid)
 
     def generate(self):
-        self.grid = self.drunk_walker.drunk_walk(20)
+        self.grid = self.drunk_walker.drunk_walk(randint(ROOM_RANGE[0], ROOM_RANGE[1]))
         print(self.grid)
 
     def choose_door(self, room):

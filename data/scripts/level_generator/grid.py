@@ -1,4 +1,4 @@
-from data.scripts.level_generator.config import EMPTY, TAKEN
+from data.scripts.level_generator.config import EMPTY, TAKEN, ROOM
 
 
 class Grid:
@@ -8,22 +8,8 @@ class Grid:
         self.height = 9
         self.grid = [[0 for _ in range(10)] for _ in range(10)]
 
-    def check_around(self, point):
-        return {'top': self.check_top(point), 'bottom': self.check_bottom(point), 'left': self.check_left(point),
-                'right': self.check_right(point)}
-
-    def __iter__(self):
-        for row in self.grid:
-            for room in row:
-                yield room
-
-    def __str__(self):
-        string = ''
-        for row in self.grid:
-            for char in row:
-                string += str(char)
-            string += '\n'
-        return string
+    def get_room(self, pos):
+        return self.grid[pos[0]][pos[1]]
 
     def check_top(self, point):
         if point[0] == 0:
@@ -52,6 +38,10 @@ class Grid:
     def check_bottom_right(self, point):
         return point[0] == self.height or point[1] == self.width or self.get_grid_right(self.get_bottom(point)) != EMPTY
 
+    def check_around(self, point):
+        return {'top': self.check_top(point), 'bottom': self.check_bottom(point), 'left': self.check_left(point),
+                'right': self.check_right(point)}
+
     def get_grid_top(self, point):
         return self.grid[point[0] - 1][point[1]]
 
@@ -77,7 +67,9 @@ class Grid:
         return point[0], point[1] + 1
 
     def take(self, pos):
-        self.grid[pos[0]][pos[1]] = TAKEN
+        room = dict(ROOM)
+        room['pos'] = pos
+        self.grid[pos[0]][pos[1]] = room
 
     def place_room(self, room, pos):
         self.take(pos)
@@ -99,3 +91,17 @@ class Grid:
                 self.take(self.get_bottom(pos))
                 self.take(self.get_bottom(self.get_right(pos)))
         return True
+
+    def __iter__(self):
+        for row in self.grid:
+            for room in row:
+                yield room
+
+    def __str__(self):
+        string = ''
+        for row in self.grid:
+            for char in row:
+                string += str(char)
+            string += '\n'
+        return string
+

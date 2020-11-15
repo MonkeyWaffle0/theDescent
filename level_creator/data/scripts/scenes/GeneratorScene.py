@@ -2,12 +2,12 @@ from math import floor
 
 import pygame
 
-from level_generator.data.scripts.block import Block
-from level_generator.data.scripts.button import BorderButton, SaveButton, LoadButton, BlockButton
-from level_generator.data.scripts.config import LEVEL_WINDOW, GRID_SIZE, WHITE, BLACK, NEXT_LINE, BLOCK, EXIT, SPAWN, \
+from level_creator.data.scripts.block import Block
+from level_creator.data.scripts.button import BorderButton, SaveButton, LoadButton, BlockButton
+from level_creator.data.scripts.config import LEVEL_WINDOW, GRID_SIZE, WHITE, BLACK, NEXT_LINE, BLOCK, EXIT, SPAWN, \
     SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT
-from level_generator.data.scripts.core_funcs import mouse_over
-from level_generator.data.scripts.scenes.scene import Scene
+from level_creator.data.scripts.core_funcs import mouse_over
+from level_creator.data.scripts.scenes.scene import Scene
 
 
 class GeneratorScene(Scene):

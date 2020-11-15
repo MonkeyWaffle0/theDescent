@@ -4,7 +4,7 @@ from data.scripts.config import BLOCK, GRID_SIZE, NEXT_LINE, LEVEL_PATH, SPAWN, 
 from data.scripts.entities.exit import Exit
 from data.scripts.entities.spike import Spike
 from data.scripts.entities.wall import Wall
-from level_generator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT, SPIKES
+from level_creator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT, SPIKES
 
 
 class LevelHandler:

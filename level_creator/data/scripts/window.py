@@ -1,6 +1,6 @@
 import pygame
 
-from level_generator.data.scripts.config import DISPLAY_SIZE, BLACK, LEVEL_WINDOW
+from level_creator.data.scripts.config import DISPLAY_SIZE, BLACK, LEVEL_WINDOW
 
 
 class GameWindow:

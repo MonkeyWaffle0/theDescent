@@ -1,7 +1,7 @@
 import pygame
 
 from data.scripts.config import DISPLAY_SIZE, RED, ORANGE
-from level_generator.data.scripts.config import FONT
+from level_creator.data.scripts.config import FONT
 
 
 class ReconnectController:

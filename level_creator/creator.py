@@ -5,7 +5,7 @@ from data.scripts.ui.user_input import InputManager
 from data.scripts.window import GameWindow
 
 from data.scripts.config import FPS
-from level_generator.data.scripts.scenes.GeneratorScene import GeneratorScene
+from level_creator.data.scripts.scenes.GeneratorScene import GeneratorScene
 
 
 class LevelGenerator:

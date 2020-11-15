@@ -1,6 +1,6 @@
 import pygame
 
-from level_generator.data.scripts.config import GRID_SIZE, BLACK, GREEN, BLUE
+from level_creator.data.scripts.config import GRID_SIZE, BLACK, GREEN, BLUE
 
 
 class Block:

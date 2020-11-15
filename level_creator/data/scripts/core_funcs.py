@@ -4,7 +4,7 @@ import pickle
 
 import pygame
 
-from level_generator.data.scripts.config import GRID_SIZE, LEVEL_WINDOW, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH
+from level_creator.data.scripts.config import GRID_SIZE, LEVEL_WINDOW, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH
 
 
 def read_f(path):

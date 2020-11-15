@@ -16,7 +16,7 @@ BLACK = (0, 0, 0)
 GRAY = (200, 200, 200)
 DARK_GRAY = (50, 50, 50)
 
-LEVEL_PATH = "C:/Users/reafl/PycharmProjects/theDescent/level_generator/data/saved_levels/"
+LEVEL_PATH = "/level_creator/data/saved_levels/"
 
 BLOCK = {'letter': 'B', 'name': 'blocks', 'color': BLACK}
 NOTHING = 'N'

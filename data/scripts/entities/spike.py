@@ -3,7 +3,7 @@ import pygame
 from data.scripts.config import GRAY, GRID_SIZE
 from data.scripts.entities.base_entities import GameEntity
 from data.scripts.entities.player import Player
-from level_generator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT
+from level_creator.data.scripts.config import SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT
 
 
 class Spike(GameEntity):

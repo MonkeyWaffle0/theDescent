@@ -11,14 +11,14 @@ class LevelHandler:
     def __init__(self, game):
         self.game = game
 
-    def string_to_level(self, string):
+    def string_to_level(self, level):
         x = 0
         y = 0
         level_dic = {'blocks': [],
                      'spawn': [],
                      'exit': [],
                      'spike': []}
-        for char in string:
+        for char in level['string']:
             if char == BLOCK['letter']:
                 level_dic[BLOCK['name']].append(
                     Wall(self.game, self.game.entities, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
@@ -42,8 +42,8 @@ class LevelHandler:
     def load_level(self, name):
         try:
             with open(LEVEL_PATH + name + '.pickle', 'rb') as file:
-                string = pickle.load(file)
+                level = pickle.load(file)
             print("Level " + name + " loaded.\n")
-            return self.string_to_level(string)
+            return self.string_to_level(level)
         except FileNotFoundError:
             print("No such file found.\n")

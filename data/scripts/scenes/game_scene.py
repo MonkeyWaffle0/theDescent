@@ -21,4 +21,5 @@ class GameScene(Scene):
         self.display.fill(WHITE)
 
     def load_level(self):
-        self.level_dic = self.level_handler.load_level('level2')
+        self.level_dic = self.level_handler.load_level('small_2')
+        print(self.level_dic)

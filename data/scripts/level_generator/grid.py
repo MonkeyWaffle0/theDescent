@@ -35,24 +35,25 @@ class Grid:
         else:
             return self.get_right(point)
 
-    def check_bottom_right(self, point):
-        return point[0] == self.height or point[1] == self.width or self.get_grid_right(self.get_bottom(point)) != EMPTY
-
     def check_around(self, point):
         return {'top': self.check_top(point), 'bottom': self.check_bottom(point), 'left': self.check_left(point),
                 'right': self.check_right(point)}
 
     def get_grid_top(self, point):
-        return self.grid[point[0] - 1][point[1]]
+        if self.check_top(point):
+            return self.grid[point[0] - 1][point[1]]
 
     def get_grid_bottom(self, point):
-        return self.grid[point[0] + 1][point[1]]
+        if self.check_bottom(point):
+            return self.grid[point[0] + 1][point[1]]
 
     def get_grid_left(self, point):
-        return self.grid[point[0]][point[1] - 1]
+        if self.check_left(point):
+            return self.grid[point[0]][point[1] - 1]
 
     def get_grid_right(self, point):
-        return self.grid[point[0]][point[1] + 1]
+        if self.check_right(point):
+            return self.grid[point[0]][point[1] + 1]
 
     def get_top(self, point):
         return point[0] - 1, point[1]
@@ -91,6 +92,9 @@ class Grid:
                 self.take(self.get_bottom(pos))
                 self.take(self.get_bottom(self.get_right(pos)))
         return True
+
+    def remove_room(self, pos):
+        self.grid[pos[0]][pos[1]] = EMPTY
 
     def __iter__(self):
         for row in self.grid:

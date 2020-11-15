@@ -1,7 +1,7 @@
 import pygame
 
 from data.scripts.config import WHITE, BLACK, RED, GREEN, BLUE, PURPLE, YELLOW
-from level_creator.data.scripts.config import FONT, BLOCK, SPAWN, LEVEL_WINDOW
+from level_creator.data.scripts.config import FONT, BLOCK, SPAWN
 from level_creator.data.scripts.core_funcs import save_level, load_level
 
 

@@ -1,8 +1,7 @@
 import pygame
 
-LEVEL_WINDOW = [1280, 640]
-DISPLAY_SIZE = [1280, 720]
-GRID_SIZE = 32
+DISPLAY_SIZE = [1300, 1024]
+GRID_SIZE = 16
 FPS = 300
 
 
@@ -36,3 +35,13 @@ NEXT_LINE = '\n'
 
 pygame.font.init()
 FONT = pygame.font.Font('freesansbold.ttf', 18)
+
+
+DUNGEON_TILE = 512
+
+SHAPES = {
+    'I': {'width': DUNGEON_TILE, 'height': DUNGEON_TILE * 2, 'letter': 'I'},
+    '_': {'width': DUNGEON_TILE * 2, 'height': DUNGEON_TILE, 'letter': '_'},
+    'o': {'width': DUNGEON_TILE, 'height': DUNGEON_TILE, 'letter': 'o'},
+    'O': {'width': DUNGEON_TILE * 2, 'height': DUNGEON_TILE * 2, 'letter': 'O'}
+}

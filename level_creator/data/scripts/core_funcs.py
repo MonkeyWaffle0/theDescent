@@ -4,7 +4,7 @@ import pickle
 
 import pygame
 
-from level_creator.data.scripts.config import GRID_SIZE, LEVEL_WINDOW, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH
+from level_creator.data.scripts.config import GRID_SIZE, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH
 
 
 def read_f(path):
@@ -135,9 +135,9 @@ def mouse_over(rect):
 
 def level_to_string(level):
     level_list = []
-    for i in range(LEVEL_WINDOW[1] // GRID_SIZE):
+    for i in range(level.level_window[1] // GRID_SIZE):
         y = i * GRID_SIZE + 1
-        for j in range(LEVEL_WINDOW[0] // GRID_SIZE):
+        for j in range(level.level_window[0] // GRID_SIZE):
             x = j * GRID_SIZE + 1
             collided = False
             for block in level.level_list:

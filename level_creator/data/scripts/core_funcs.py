@@ -239,8 +239,8 @@ def load_level(game):
     name = input("Input the level name :\n")
     try:
         with open(LEVEL_PATH + name + '.pickle', 'rb') as file:
-            string = pickle.load(file)
+            level = pickle.load(file)
         print("Loaded " + name + " level.\n")
-        return game.active_scene.convert_to_level(string)
+        return game.active_scene.convert_to_level(level)
     except:
         print("No such file found.\n")

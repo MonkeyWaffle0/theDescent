@@ -5,7 +5,7 @@ import pygame
 from level_creator.data.scripts.block import Block
 from level_creator.data.scripts.button import BorderButton, SaveButton, LoadButton, BlockButton
 from level_creator.data.scripts.config import GRID_SIZE, WHITE, BLACK, NEXT_LINE, BLOCK, EXIT, SPAWN, \
-    SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT, SHAPES
+    SPIKE_UP, SPIKE_DOWN, SPIKE_LEFT, SPIKE_RIGHT, SHAPES, SPIKES
 from level_creator.data.scripts.core_funcs import mouse_over
 from level_creator.data.scripts.scenes.scene import Scene
 
@@ -125,13 +125,19 @@ class GeneratorScene(Scene):
                     self.level_list.remove(block)
                     break
 
-    def convert_to_level(self, string):
+    def convert_to_level(self, level):
         x = 0
         y = 0
         level_list = []
-        for char in string:
+        for char in level['string']:
             if char == BLOCK['letter']:
                 level_list.append(Block(self.game, x * GRID_SIZE, y * GRID_SIZE, BLOCK))
+            elif char in SPIKES:
+                level_list.append(Block(self.game, x * GRID_SIZE, y * GRID_SIZE, SPIKES[char]))
+            elif char == SPAWN['letter']:
+                level_list.append(Block(self.game, x * GRID_SIZE, y * GRID_SIZE, SPAWN))
+            elif char == EXIT['letter']:
+                level_list.append(Block(self.game, x * GRID_SIZE, y * GRID_SIZE, EXIT))
             x += 1
             if char == NEXT_LINE:
                 y += 1

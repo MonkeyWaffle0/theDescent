@@ -4,6 +4,7 @@ import pickle
 
 import pygame
 
+from data.scripts.level_generator.config import SMALL_SQUARE_SHAPE
 from level_creator.data.scripts.config import GRID_SIZE, NOTHING, BLOCK, NEXT_LINE, LEVEL_PATH
 
 
@@ -148,17 +149,22 @@ def level_to_string(level):
                 level_list.append(NOTHING)
         level_list.append(NEXT_LINE)
     level_string = ''.join(level_list)
-    return level_string
+    return {'string': level_string, 'shape': level.shape}
 
 
-def string_to_pickle(string, name):
+def level_to_pickle(level, name):
     with open(LEVEL_PATH + name + '.pickle', 'wb') as file:
-        pickle.dump(string, file)
+        pickle.dump(level, file)
 
 
 def save_level(level, name):
-    string_to_pickle(level_to_string(level), name)
+    level_to_pickle(level_to_string(level), name)
     print("Level " + name + " saved.\n")
+
+
+def get_doors(level):
+    if level['shape'] == SMALL_SQUARE_SHAPE:
+
 
 
 def load_level(game):

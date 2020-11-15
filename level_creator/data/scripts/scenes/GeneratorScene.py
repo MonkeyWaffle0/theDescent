@@ -15,8 +15,8 @@ class GeneratorScene(Scene):
         super().__init__(game)
         self.level_list = []
 
-        room_type = 'o'
-        self.level_window = (SHAPES[room_type]['width'], SHAPES[room_type]['height'])
+        shape = 'o'
+        self.level_window = (SHAPES[shape]['width'], SHAPES[shape]['height'])
 
         block_list = []
         for i in range(self.level_window[0] // GRID_SIZE):
